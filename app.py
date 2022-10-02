@@ -185,7 +185,7 @@ def main():
                                             interactive=False)  
             with gr.Row():
                 with gr.Column():
-                    paths = ['./vtoonify/data/pexels-andrea-piacquadio-733872.jpg','./vtoonify/data/077436.jpg']
+                    paths = ['./vtoonify/data/pexels-andrea-piacquadio-733872.jpg','./vtoonify/data/i5R8hbZFDdc.jpg','./vtoonify/data/yRpe13BHdKw.jpg','./vtoonify/data/ILip77SbmOE.jpg','./vtoonify/data/077436.jpg','./vtoonify/data/081680.jpg','./vtoonify/data/et_78QkMMQs.jpg']
                     example_images = gr.Dataset(components=[input_image],
                                             samples=[[path] for path in paths],
                                                label='Image Examples')
@@ -210,6 +210,7 @@ def main():
                         - Adjust **Style Degree**.
                         - For image, hit **Toonify!** to toonify **Rescaled Face**.
                         - For video, hit e **VToonify!** to toonify **Rescaled Video**.
+                            - Estimated time on 1600x1440 video of 300 frames: 1 hour (CPU); 1.5 mins (GPU)
                         ''')
                     style_degree = gr.Slider(0,
                                              1,
