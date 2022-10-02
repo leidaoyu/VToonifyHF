@@ -152,7 +152,7 @@ class Model():
         message = 'Error: no face detected!'
         instyle = torch.zeros(1,18,512).to(self.device)
         video_cap = cv2.VideoCapture(video)
-        num = int(video_cap.get(7))
+        num = min(100, int(video_cap.get(7)))
         success, frame = video_cap.read()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame, instyle, message, w, h, top, bottom, left, right, scale = self.detect_and_align(frame, top, bottom, left, right, True)
@@ -199,7 +199,7 @@ class Model():
         if exstyle is None:
             exstyle = self.exstyle
         video_cap = cv2.VideoCapture(aligned_video)
-        num = int(video_cap.get(7))
+        num = min(100, int(video_cap.get(7)))
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         videoWriter = cv2.VideoWriter('output.mp4', fourcc, 
                                       video_cap.get(5), (int(video_cap.get(3)*4),
