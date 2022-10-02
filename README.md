@@ -2,7 +2,7 @@
 title: VToonify
 emoji: 👨‍🎨
 colorFrom: yellow
-colorTo: green
+colorTo: pink
 sdk: gradio
 sdk_version: 3.4
 app_file: app.py
