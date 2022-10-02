@@ -119,7 +119,7 @@ def main():
     - Hit the **Rescale Image**/**Rescale First Frame** button.
         - Rescale the input to make it best fit the model.
         - The final image result will be based on this **Rescaled Face**. Use padding parameters to adjust the background space.
-        - <font color=red>**Solution to [Error: no face detected!]**</font>: VToonify uses dlib.get_frontal_face_detector but sometimes it fails to detect a face. You can try several times or use other images until a face is detected, then switch back to the original image.
+        - **<font color=red>Solution to [Error: no face detected!]</font>**: VToonify uses dlib.get_frontal_face_detector but sometimes it fails to detect a face. You can try several times or use other images until a face is detected, then switch back to the original image.
     - For video input, further hit the **Rescale Video** button.
         - The final video result will be based on this **Rescaled Video**. To avoid overload, video is cut to at most **100** frames.
 
