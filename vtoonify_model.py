@@ -200,7 +200,7 @@ class Model():
             exstyle = self.exstyle
         video_cap = cv2.VideoCapture(aligned_video)
         num = int(video_cap.get(7))
-        fourcc = cv2.VideoWriter_fourcc(*'MP4V')
+        fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         videoWriter = cv2.VideoWriter('output.mp4', fourcc, 
                                       video_cap.get(5), (int(video_cap.get(3)*4),
                                       int(video_cap.get(4)*4)))        
