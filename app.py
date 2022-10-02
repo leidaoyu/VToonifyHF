@@ -121,7 +121,7 @@ def main():
         - Rescale the input to make it best fit the model.
         - The final image result will be based on this **Rescaled Face**. Use padding parameters to adjust the background space.
     - For video input, further hit the **Rescale Video** button.
-        - The final video result will be based on this **Rescaled Video**.
+        - The final video result will be based on this **Rescaled Video**. To avoid overload, video is cut to at most **100** frames.
 
     ''')
             with gr.Row():
@@ -131,25 +131,25 @@ def main():
         ![example](https://raw.githubusercontent.com/williamyang1991/tmpfile/master/vtoonify/rescale.jpg)''')
                         with gr.Row():
                             top = gr.Slider(128,
-                                            320,
+                                            256,
                                             value=200,
                                             step=8,
                                             label='top')
                         with gr.Row():
                             bottom = gr.Slider(128,
-                                            320,
+                                            256,
                                             value=200,
                                             step=8,
                                             label='bottom')
                         with gr.Row():
                             left = gr.Slider(128,
-                                            320,
+                                            256,
                                             value=200,
                                             step=8,
                                             label='left')
                         with gr.Row():
                             right = gr.Slider(128,
-                                            320,
+                                            256,
                                             value=200,
                                             step=8,
                                             label='right')     
