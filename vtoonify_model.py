@@ -18,6 +18,7 @@ from model.encoder.align_all_parallel import align_face
 import gc
 import huggingface_hub
 import os
+from tqdm import tqdm
 
 MODEL_REPO = 'PKUWilliamYang/VToonify'
 
@@ -217,7 +218,7 @@ class Model():
             else:
                 s_w = instyle.clone()
                 s_w[:,:7] = exstyle[:,:7]
-            for i in range(num):
+            for i in tqdm(range(num)):
                 success, frame = video_cap.read()
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 batch_frames += [self.transform(frame).unsqueeze(dim=0).to(self.device)]
