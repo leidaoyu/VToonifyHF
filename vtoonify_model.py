@@ -162,7 +162,7 @@ class Model():
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         videoWriter = cv2.VideoWriter('input.mp4', fourcc, video_cap.get(5), (int(right-left), int(bottom-top)))
         kernel_1d = np.array([[0.125],[0.375],[0.375],[0.125]])
-        for i in range(num-1):
+        for i in tqdm(range(num-1)):
             success, frame = video_cap.read()
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)            
             if scale <= 0.75:
@@ -208,9 +208,9 @@ class Model():
 
         batch_frames = []
         if video_cap.get(3) != 0:
-            batch_size = min(max(1, int(round(4 * 400 * 360 / video_cap.get(3) / video_cap.get(4)))), 4)
+            batch_size = max(1, int(round(4 * 256* 256/ video_cap.get(3) / video_cap.get(4))))
         else:
-            batch_size = 4
+            batch_size = 1
         print('Using batch size of %d on %d frames'%(batch_size, num))
         with torch.no_grad():
             if self.color_transfer:
@@ -218,7 +218,7 @@ class Model():
             else:
                 s_w = instyle.clone()
                 s_w[:,:7] = exstyle[:,:7]
-            for i in tqdm(range(num)):
+            for i in range(num):
                 success, frame = video_cap.read()
                 frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                 batch_frames += [self.transform(frame).unsqueeze(dim=0).to(self.device)]
