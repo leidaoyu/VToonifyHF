@@ -115,11 +115,11 @@ def main():
 
         with gr.Box():
             gr.Markdown('''## Step 2 (Preprocess Input Image / Video)
-    - Drop an image/video containing a near-frontal face to the **Input Image**/**Input Video.
+    - Drop an image/video containing a near-frontal face to the **Input Image**/**Input Video**.
         - If there are multiple faces, hit the Edit button in the upper right corner and crop the source beforehand.
-    - Hit the **Rescale Image**/ **Rescale First Frame** button.
-        - The final image result will be based on this **Rescaled Face**.
-        - Use padding parameters to adjust the background space.
+    - Hit the **Rescale Image**/**Rescale First Frame** button.
+        - Rescale the input to make it best fit the model.
+        - The final image result will be based on this **Rescaled Face**. Use padding parameters to adjust the background space.
     - For video input, further hit the **Rescale Video** button.
         - The final video result will be based on this **Rescaled Video**.
 
