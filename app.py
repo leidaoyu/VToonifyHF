@@ -208,8 +208,7 @@ def main():
                     gr.Markdown('''
 
                         - Adjust **Style Degree**.
-                        - For image, hit **Toonify!** to toonify **Rescaled Face**.
-                        - For video, hit e **VToonify!** to toonify **Rescaled Video**.
+                        - Hit **Toonify!** to toonify one frame. Hit **VToonify!** to toonify full video.
                             - Estimated time on 1600x1440 video of 300 frames: 1 hour (CPU); 1.5 mins (GPU)
                         ''')
                     style_degree = gr.Slider(0,
