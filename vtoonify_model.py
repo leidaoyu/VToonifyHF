@@ -206,7 +206,8 @@ class Model():
                                       int(video_cap.get(4)*4)))        
 
         batch_frames = []
-        batch_size = 4
+        batch_size = max(1, int(round(4 * 256 * 256 / video_cap.get(3) / video_cap.get(4))))
+        print('Using batch size of %d on %d frames'%(batch_size, num))
         with torch.no_grad():
             if self.color_transfer:
                 s_w = exstyle
