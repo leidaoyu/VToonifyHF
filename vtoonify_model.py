@@ -18,7 +18,6 @@ from model.encoder.align_all_parallel import align_face
 import gc
 import huggingface_hub
 import os
-from tqdm import tqdm
 
 MODEL_REPO = 'PKUWilliamYang/VToonify'
 
@@ -162,7 +161,7 @@ class Model():
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         videoWriter = cv2.VideoWriter('input.mp4', fourcc, video_cap.get(5), (int(right-left), int(bottom-top)))
         kernel_1d = np.array([[0.125],[0.375],[0.375],[0.125]])
-        for i in tqdm(range(num-1)):
+        for i in range(num-1):
             success, frame = video_cap.read()
             frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)            
             if scale <= 0.75:
