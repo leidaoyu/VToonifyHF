@@ -185,7 +185,7 @@ def main():
                                             interactive=False)  
             with gr.Row():
                 with gr.Column():
-                    paths = ['./vtoonify/data/pexels-andrea-piacquadio-733872.jpg','./vtoonify/data/i5R8hbZFDdc.jpg','./vtoonify/data/yRpe13BHdKw.jpg','./vtoonify/data/ILip77SbmOE.jpg','./vtoonify/data/077436.jpg','./vtoonify/data/081680.jpg','./vtoonify/data/et_78QkMMQs.jpg']
+                    paths = ['./vtoonify/data/pexels-andrea-piacquadio-733872.jpg','./vtoonify/data/i5R8hbZFDdc.jpg','./vtoonify/data/yRpe13BHdKw.jpg','./vtoonify/data/ILip77SbmOE.jpg','./vtoonify/data/077436.jpg','./vtoonify/data/081680.jpg']
                     example_images = gr.Dataset(components=[input_image],
                                             samples=[[path] for path in paths],
                                                label='Image Examples')
