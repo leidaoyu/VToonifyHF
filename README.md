@@ -1,6 +1,6 @@
 ---
 title: VToonify
-emoji: 📈
+emoji: 👨‍🎨
 colorFrom: yellow
 colorTo: green
 sdk: gradio
