@@ -88,8 +88,8 @@ def main():
         with gr.Box():
             gr.Markdown('''## Step 1(Select Style)
     - Select **Style Type**.
-        - Types with `-d` means it supports style degree adjustment.
-        - Types without `-d` usually has better toonification quality.
+        - Type with `-d` means it supports style degree adjustment.
+        - Type without `-d` usually has better toonification quality.
 
     ''')
             with gr.Row():
