@@ -23,7 +23,7 @@ FOOTER = '<div align=center><img id="visitor-badge" alt="visitor badge" src="htt
 
 ARTICLE = r"""
 If VToonify is helpful, please help to ⭐ the <a href='https://github.com/williamyang1991/VToonify' target='_blank'>Github Repo</a>. Thanks! 
-[![GitHub Stars](https://img.shields.io/github/stars/sczhou/CodeFormer?style=social)](https://github.com/williamyang1991/VToonify)
+[![GitHub Stars](https://img.shields.io/github/stars/williamyang1991/VToonify?style=social)](https://github.com/williamyang1991/VToonify)
 ---
 📝 **Citation**
 If our work is useful for your research, please consider citing:
