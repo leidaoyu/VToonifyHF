@@ -52,9 +52,11 @@ If our work is useful for your research, please consider citing:
   doi={10.1145/3550454.3555437},
 }
 ```
+
 📋 **License**
 This project is licensed under <a rel="license" href="https://github.com/williamyang1991/VToonify/blob/main/LICENSE.md">S-Lab License 1.0</a>. 
 Redistribution and use for non-commercial purposes should follow this license.
+
 📧 **Contact**
 If you have any questions, please feel free to reach me out at <b>williamyang@pku.edu.cn</b>.
 """
