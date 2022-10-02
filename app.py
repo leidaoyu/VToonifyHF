@@ -73,7 +73,7 @@ def set_example_image(example: list) -> dict:
 def set_example_video(example: list) -> dict:
     return gr.Video.update(value=example[0]), 
    
-sample_video = ['./vtoonify/data/529.mp4']
+sample_video = ['./vtoonify/data/529_2.mp4','./vtoonify/data/7154235.mp4','./vtoonify/data/651.mp4','./vtoonify/data/908.mp4']
 sample_vid = gr.Video(label='Video file')  #for displaying the example
 example_videos = gr.components.Dataset(components=[sample_vid], samples=[[path] for path in sample_video], type='values', label='Video Examples')     
 
