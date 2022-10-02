@@ -9,6 +9,17 @@ import gradio as gr
 
 from vtoonify_model import Model
 
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--device', type=str, default='cpu')
+    parser.add_argument('--theme', type=str)
+    parser.add_argument('--share', action='store_true')
+    parser.add_argument('--port', type=int)
+    parser.add_argument('--disable-queue',
+                        dest='enable_queue',
+                        action='store_false')
+    return parser.parse_args()
+
 DESCRIPTION = '''
 <div align=center>
 <h1 style="font-weight: 900; margin-bottom: 7px;">
