@@ -16,6 +16,7 @@ import torch.nn.functional as F
 from torchvision import transforms
 from model.encoder.align_all_parallel import align_face
 import gc
+import huggingface_hub
 
 MODEL_REPO = 'PKUWilliamYang/VToonify'
 
