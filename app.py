@@ -116,11 +116,10 @@ def main():
         with gr.Box():
             gr.Markdown('''## Step 2 (Preprocess Input Image / Video)
     - Drop an image/video containing a near-frontal face to the **Input Image**/**Input Video**.
-        - If there are multiple faces, hit the Edit button in the upper right corner and crop the source beforehand.
     - Hit the **Rescale Image**/**Rescale First Frame** button.
         - Rescale the input to make it best fit the model.
         - The final image result will be based on this **Rescaled Face**. Use padding parameters to adjust the background space.
-        - **Solution to [Error: no face detected!]** VToonify uses dlib.get_frontal_face_detector but sometimes it fails to detect a face. You can try several times or use other images until a face is detected, then switch back to the original image.
+        - <font color=red>**Solution to [Error: no face detected!]**</font>: VToonify uses dlib.get_frontal_face_detector but sometimes it fails to detect a face. You can try several times or use other images until a face is detected, then switch back to the original image.
     - For video input, further hit the **Rescale Video** button.
         - The final video result will be based on this **Rescaled Video**. To avoid overload, video is cut to at most **100** frames.
 
