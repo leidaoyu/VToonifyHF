@@ -73,7 +73,7 @@ def set_example_image(example: list) -> dict:
 def set_example_video(example: list) -> dict:
     return gr.Video.update(value=example[0]), 
    
-sample_video = ['./vtoonify/data/529.mp4', './vtoonify/data/pexels-anthony-shkraba-7525601.mp4']
+sample_video = ['./vtoonify/data/529.mp4']
 sample_vid = gr.Video(label='Video file')  #for displaying the example
 example_videos = gr.components.Dataset(components=[sample_vid], samples=[[path] for path in sample_video], type='values', label='Video Examples')     
 
@@ -185,7 +185,7 @@ def main():
                                             interactive=False)  
             with gr.Row():
                 with gr.Column():
-                    paths = ['./vtoonify/data/077436.jpg', './vtoonify/data/pexels-andrea-piacquadio-733872.jpg']
+                    paths = ['./vtoonify/data/pexels-andrea-piacquadio-733872.jpg','./vtoonify/data/077436.jpg']
                     example_images = gr.Dataset(components=[input_image],
                                             samples=[[path] for path in paths],
                                                label='Image Examples')
