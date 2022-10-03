@@ -219,7 +219,7 @@ class Model():
         if aligned_video is None:
             return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'         
         video_cap = cv2.VideoCapture(aligned_video)
-        if instyle is None or aligned_face is None or video_cap.get(7) == 0:
+        if instyle is None or aligned_video is None or video_cap.get(7) == 0:
             video_cap.release()
             return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'
         if exstyle is None:
