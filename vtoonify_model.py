@@ -57,6 +57,7 @@ class Model():
         
         self.vtoonify, self.exstyle = self._load_default_model()
         self.color_transfer = False
+        self.style_name = 'cartoon1'
         
     @staticmethod
     def _create_dlib_landmark_model():
@@ -93,6 +94,7 @@ class Model():
             self.color_transfer = False
         if style_type not in self.style_types.keys():
             return None, 'Oops, wrong Style Type. Please select a valid model.'
+        self.style_name = style_type
         model_path, ind = self.style_types[style_type]
         style_path = os.path.join('models',os.path.dirname(model_path),'exstyle_code.npy')
         self.vtoonify.load_state_dict(torch.load(huggingface_hub.hf_hub_download(MODEL_REPO,'models/'+model_path), 
@@ -213,7 +215,7 @@ class Model():
             y_tilde = self.vtoonify(inputs, s_w.repeat(inputs.size(0), 1, 1), d_s = style_degree)        
             y_tilde = torch.clamp(y_tilde, -1, 1)
 
-        return ((y_tilde[0].cpu().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8), 'Successfully toonify the image'
+        return ((y_tilde[0].cpu().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8), 'Successfully toonify the image with style of %s'%(self.style_name)
     
     def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> tuple[str, str]:
         if aligned_video is None:
@@ -266,6 +268,6 @@ class Model():
 
         videoWriter.release()
         video_cap.release()
-        return 'output.mp4', 'Successfully toonify video of %d frames'%(num)
+        return 'output.mp4', 'Successfully toonify video of %d frames with style of %s'%(num, self.style_name)
 
 
