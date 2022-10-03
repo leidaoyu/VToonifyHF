@@ -121,7 +121,7 @@ def main():
         - The final image result will be based on this **Rescaled Face**. Use padding parameters to adjust the background space.
         - **<font color=red>Solution to [Error: no face detected!]</font>**: VToonify uses dlib.get_frontal_face_detector but sometimes it fails to detect a face. You can try several times or use other images until a face is detected, then switch back to the original image.
     - For video input, further hit the **Rescale Video** button.
-        - The final video result will be based on this **Rescaled Video**. To avoid overload, video is cut to at most **100** frames.
+        - The final video result will be based on this **Rescaled Video**. To avoid overload, video is cut to at most **100/300** frames for CPU/GPU, respectively.
 
     ''')
             with gr.Row():
@@ -209,7 +209,7 @@ def main():
 
                         - Adjust **Style Degree**.
                         - Hit **Toonify!** to toonify one frame. Hit **VToonify!** to toonify full video.
-                            - Estimated time on 1600x1440 video of 300 frames: 1 hour (CPU); 1.5 mins (GPU)
+                            - Estimated time on 1600x1440 video of 300 frames: 1 hour (CPU); 2 mins (GPU)
                         ''')
                     style_degree = gr.Slider(0,
                                              1,
