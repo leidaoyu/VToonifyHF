@@ -161,7 +161,7 @@ class Model():
         video_cap = cv2.VideoCapture(video)
         if video_cap.get(7) == 0:
             video_cap.release()
-            return 'default.mp4' instyle, 'Error: fail to load the video.'    
+            return 'default.mp4', instyle, 'Error: fail to load the video.'    
         num = min(300, int(video_cap.get(7)))
         if self.device == 'cpu':
             num = min(100, num)
