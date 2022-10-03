@@ -148,6 +148,7 @@ class Model():
 
         video_cap = cv2.VideoCapture(video)
         if video_cap.get(7) == 0:
+            video_cap.release()
             return np.zeros((256,256,3), np.uint8), torch.zeros(1,18,512).to(self.device), 'Error: fail to load the video.'
         success, frame = video_cap.read()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -158,6 +159,9 @@ class Model():
         message = 'Error: no face detected! Please retry or change the video.'
         instyle = torch.zeros(1,18,512).to(self.device)
         video_cap = cv2.VideoCapture(video)
+        if video_cap.get(7) == 0:
+            video_cap.release()
+            return 'default.mp4' instyle, 'Error: fail to load the video.'    
         num = min(300, int(video_cap.get(7)))
         if self.device == 'cpu':
             num = min(100, num)
