@@ -220,6 +220,8 @@ def main():
                     gr.Markdown('''![example](https://raw.githubusercontent.com/williamyang1991/tmpfile/master/vtoonify/degree.jpg)
                         ''')  
             with gr.Row():
+                output_info = gr.Textbox(label='Process Information', interactive=False, value='n.a.')
+            with gr.Row():
                 with gr.Column():
                     with gr.Row():
                         result_face = gr.Image(label='Result Image',
@@ -259,10 +261,10 @@ def main():
 
         toonify_button.click(fn=model.image_toonify,
                                 inputs=[aligned_face, instyle, exstyle, style_degree],
-                                outputs=[result_face])
+                                outputs=[result_face, output_info])
         vtoonify_button.click(fn=model.video_tooniy,
                                 inputs=[aligned_video, instyle, exstyle, style_degree],
-                                outputs=[result_video])
+                                outputs=[result_video, output_info])
 
 
         example_images.click(fn=set_example_image,
