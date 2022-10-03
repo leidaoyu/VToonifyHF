@@ -217,13 +217,13 @@ class Model():
     
     def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> tuple[str, str]:
         if aligned_video is None:
-            return 'output.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'         
+            return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'         
         video_cap = cv2.VideoCapture(aligned_video)
         if instyle is None or aligned_face is None or video_cap.get(7) == 0:
             video_cap.release()
-            return 'output.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'
+            return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'
         if exstyle is None:
-            return 'output.mp4', 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
+            return 'default.mp4', 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
         num = min(300, int(video_cap.get(7)))
         if self.device == 'cpu':
             num = min(100, num)
