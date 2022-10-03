@@ -214,7 +214,7 @@ class Model():
             inputs = torch.cat((x, x_p/16.), dim=1)
             y_tilde = self.vtoonify(inputs, s_w.repeat(inputs.size(0), 1, 1), d_s = style_degree)        
             y_tilde = torch.clamp(y_tilde, -1, 1)
-
+        print('*** Toonify %dx%d image'%(y_tilde.shape[2], y_tilde.shape[3]))
         return ((y_tilde[0].cpu().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8), 'Successfully toonify the image with style of %s'%(self.style_name)
     
     def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> tuple[str, str]:
@@ -242,7 +242,7 @@ class Model():
                 batch_size = min(max(1, int(4 * 400 * 360/ video_cap.get(3) / video_cap.get(4))), 4)
         else:
             batch_size = 1
-        print('Using batch size of %d on %d frames'%(batch_size, num))
+        print('*** Toonify using batch size of %d on %dx%d video of %d frames'%(batch_size, int(video_cap.get(3)*4), int(video_cap.get(4)*4, num))
         with torch.no_grad():
             if self.color_transfer:
                 s_w = exstyle
