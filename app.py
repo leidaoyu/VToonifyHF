@@ -195,8 +195,8 @@ def main():
                     example_videos.render()
                     #to load sample video into input_video upon clicking on it
                     def load_examples(video):  
-                        print("****** inside load_example() ******")
-                        print("in_video is : ", video[0])
+                        #print("****** inside load_example() ******")
+                        #print("in_video is : ", video[0])
                         return video[0]
 
                     example_videos.click(load_examples, example_videos, input_video) 
