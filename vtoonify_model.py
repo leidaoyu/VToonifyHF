@@ -91,6 +91,8 @@ class Model():
             self.color_transfer = True
         else:
             self.color_transfer = False
+        if style_type not in self.style_types.keys():
+            return torch.zeros(1,18,512).to(self.device), 'Oops, wrong Style Type. Please select a valid model.'
         model_path, ind = self.style_types[style_type]
         style_path = os.path.join('models',os.path.dirname(model_path),'exstyle_code.npy')
         self.vtoonify.load_state_dict(torch.load(huggingface_hub.hf_hub_download(MODEL_REPO,'models/'+model_path), 
@@ -102,7 +104,7 @@ class Model():
         return exstyle, 'Model of %s loaded.'%(style_type)
     
     def detect_and_align(self, frame, top, bottom, left, right, return_para=False):
-        message = 'Error: no face detected!'
+        message = 'Error: no face detected! Please retry or change the photo.'
         paras = get_video_crop_parameter(frame, self.landmarkpredictor, [left, right, top, bottom])
         instyle = torch.zeros(1,18,512).to(self.device)
         h, w, scale = 0, 0, 0
@@ -136,6 +138,8 @@ class Model():
                               ) -> tuple[np.ndarray, torch.Tensor, str]:
         
         frame = cv2.imread(image)
+        if frame is None:
+            return np.zeros((256,256,3), np.uint8), torch.zeros(1,18,512).to(self.device), 'Error: fail to load the image.'       
         frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         return self.detect_and_align(frame, top, bottom, left, right)
     
@@ -143,13 +147,15 @@ class Model():
                               ) -> tuple[np.ndarray, torch.Tensor, str]:
 
         video_cap = cv2.VideoCapture(video)
+        if video_cap.get(7) == 0:
+            return np.zeros((256,256,3), np.uint8), torch.zeros(1,18,512).to(self.device), 'Error: fail to load the video.'
         success, frame = video_cap.read()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         video_cap.release()
         return self.detect_and_align(frame, top, bottom, left, right)
     
     def detect_and_align_full_video(self, video: str, top: int, bottom: int, left: int, right: int) -> tuple[str, torch.Tensor, str]:
-        message = 'Error: no face detected!'
+        message = 'Error: no face detected! Please retry or change the video.'
         instyle = torch.zeros(1,18,512).to(self.device)
         video_cap = cv2.VideoCapture(video)
         num = min(300, int(video_cap.get(7)))
@@ -178,7 +184,11 @@ class Model():
 
         return 'input.mp4', instyle, 'Successfully rescale the video to (%d, %d)'%(bottom-top, right-left)
     
-    def image_toonify(self, aligned_face: np.ndarray, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> np.ndarray:  
+    def image_toonify(self, aligned_face: np.ndarray, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> tuple[np.ndarray, str]:
+        if instyle is None or aligned_face is None:
+            return np.zeros((256,256,3), np.uint8), 'Opps, something wrong with the input. Please go to Step 2 and Rescale Image/First Frame again.'
+        if exstyle is None:
+            return np.zeros((256,256,3), np.uint8), 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
         if exstyle is None:
             exstyle = self.exstyle
         with torch.no_grad():
@@ -195,12 +205,15 @@ class Model():
             y_tilde = self.vtoonify(inputs, s_w.repeat(inputs.size(0), 1, 1), d_s = style_degree)        
             y_tilde = torch.clamp(y_tilde, -1, 1)
 
-        return ((y_tilde[0].cpu().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8)
+        return ((y_tilde[0].cpu().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8), 'Successfully toonify the image'
     
-    def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> str: 
-        if exstyle is None:
-            exstyle = self.exstyle
+    def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> tuple[str, str]:
         video_cap = cv2.VideoCapture(aligned_video)
+        if instyle is None or aligned_face is None or video_cap.get(7) == 0:
+            video_cap.release()
+            return 'output.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'
+        if exstyle is None:
+            return 'output.mp4', 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
         num = min(300, int(video_cap.get(7)))
         if self.device == 'cpu':
             num = min(100, num)
@@ -243,6 +256,6 @@ class Model():
 
         videoWriter.release()
         video_cap.release()
-        return 'output.mp4'
+        return 'output.mp4', 'Successfully toonify video of %d frames'%(num)
 
 
