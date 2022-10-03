@@ -58,6 +58,8 @@ class Model():
         self.vtoonify, self.exstyle = self._load_default_model()
         self.color_transfer = False
         self.style_name = 'cartoon1'
+        self.video_limit_cpu = 100
+        self.video_limit_gpu = 300
         
     @staticmethod
     def _create_dlib_landmark_model():
@@ -168,9 +170,9 @@ class Model():
         if video_cap.get(7) == 0:
             video_cap.release()
             return 'default.mp4', instyle, 'Error: fail to load the video.'    
-        num = min(300, int(video_cap.get(7)))
+        num = min(self.video_limit_gpu, int(video_cap.get(7)))
         if self.device == 'cpu':
-            num = min(100, num)
+            num = min(self.video_limit_cpu, num)
         success, frame = video_cap.read()
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame, instyle, message, w, h, top, bottom, left, right, scale = self.detect_and_align(frame, top, bottom, left, right, True)
@@ -178,6 +180,7 @@ class Model():
             return 'default.mp4', instyle, message    
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         videoWriter = cv2.VideoWriter('input.mp4', fourcc, video_cap.get(5), (int(right-left), int(bottom-top)))
+        videoWriter.write(cv2.cvtColor(frame, cv2.COLOR_RGB2BGR))
         kernel_1d = np.array([[0.125],[0.375],[0.375],[0.125]])
         for i in range(num-1):
             success, frame = video_cap.read()
@@ -226,9 +229,9 @@ class Model():
             return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'
         if exstyle is None:
             return 'default.mp4', 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
-        num = min(300, int(video_cap.get(7)))
+        num = min(self.video_limit_gpu, int(video_cap.get(7)))
         if self.device == 'cpu':
-            num = min(100, num)
+            num = min(self.video_limit_cpu, num)
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         videoWriter = cv2.VideoWriter('output.mp4', fourcc, 
                                       video_cap.get(5), (int(video_cap.get(3)*4),
