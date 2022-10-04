@@ -99,8 +99,9 @@ def main():
                         style_type = gr.Radio(label='Style Type',
                                               choices=['cartoon1','cartoon1-d','cartoon2-d','cartoon3-d',
                                                        'cartoon4','cartoon4-d','cartoon5-d','comic1-d',
-                                                       'comic2-d','comic3-d', 'arcane1','arcane1-d','arcane2', 'arcane2-d',
-                                                       'caricature1','caricature2','pixar','pixar-d'
+                                                       'comic2-d','arcane1','arcane1-d','arcane2', 'arcane2-d',
+                                                       'caricature1','caricature2','pixar','pixar-d',
+                                                       'illustration1-d', 'illustration2-d', 'illustration3-d', 'illustration4-d', 'illustration5-d', 
                                                       ]
                                              )   
                         exstyle = gr.Variable()
