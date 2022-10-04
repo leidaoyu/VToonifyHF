@@ -36,7 +36,6 @@ class Model():
             'cartoon5-d': ['vtoonify_d_cartoon/vtoonify_s_d.pt', 8],
             'comic1-d': ['vtoonify_d_comic/vtoonify_s_d.pt', 28],
             'comic2-d': ['vtoonify_d_comic/vtoonify_s_d.pt', 18],
-            'comic3-d': ['vtoonify_d_illustration/vtoonify_s054_d_c.pt', 54],
             'arcane1': ['vtoonify_d_arcane/vtoonify_s000_d0.5.pt', 0],
             'arcane1-d': ['vtoonify_d_arcane/vtoonify_s_d.pt', 0],
             'arcane2': ['vtoonify_d_arcane/vtoonify_s077_d0.5.pt', 77],
@@ -45,6 +44,11 @@ class Model():
             'caricature2': ['vtoonify_d_caricature/vtoonify_s068_d0.5.pt', 68],
             'pixar': ['vtoonify_d_pixar/vtoonify_s052_d0.5.pt', 52],
             'pixar-d': ['vtoonify_d_pixar/vtoonify_s_d.pt', 52],
+            'illustration1-d': ['vtoonify_d_illustration/vtoonify_s054_d_c.pt', 54],
+            'illustration2-d': ['vtoonify_d_illustration/vtoonify_s004_d_c.pt', 4],
+            'illustration3-d': ['vtoonify_d_illustration/vtoonify_s009_d_c.pt', 9],
+            'illustration4-d': ['vtoonify_d_illustration/vtoonify_s043_d_c.pt', 43],
+            'illustration5-d': ['vtoonify_d_illustration/vtoonify_s086_d_c.pt', 86],
         }
         
         self.landmarkpredictor = self._create_dlib_landmark_model()
@@ -90,7 +94,7 @@ class Model():
         return vtoonify, exstyle
     
     def load_model(self, style_type: str) -> tuple[torch.Tensor, str]:
-        if style_type == 'comic3-d':
+        if 'illustration' in style_type:
             self.color_transfer = True
         else:
             self.color_transfer = False
