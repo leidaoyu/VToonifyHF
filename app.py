@@ -79,7 +79,7 @@ example_videos = gr.components.Dataset(components=[sample_vid], samples=[[path] 
 
 def main():
     args = parse_args()
-    args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    args.device = 'cuda'# if torch.cuda.is_available() else 'cpu'
     print('*** Now using %s.'%(args.device))
     model = Model(device=args.device)
     
