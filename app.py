@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import argparse
 import pathlib
-
+import torch
 import gradio as gr
 
 from vtoonify_model import Model
@@ -79,6 +79,8 @@ example_videos = gr.components.Dataset(components=[sample_vid], samples=[[path] 
 
 def main():
     args = parse_args()
+    args.device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    print('*** Now using %s.'%(args.device))
     model = Model(device=args.device)
     
     with gr.Blocks(theme=args.theme, css='style.css') as demo:
