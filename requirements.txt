@@ -1,7 +1,7 @@
-dlib==19.23.0
-numpy==1.22.3
-opencv-python-headless==4.5.5.62
-Pillow==9.0.1
-scipy==1.8.0
+dlib
+numpy
+opencv-python-headless
+Pillow
+scipy
 torch
 torchvision
