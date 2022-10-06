@@ -30,7 +30,7 @@ DESCRIPTION = '''
 " type="video/mp4">
 </videos></div>
 '''
-FOOTER = '<div align=center><img id="visitor-badge" alt="visitor badge" src="https://visitor-badge.glitch.me/badge?page_id=gradio-blocks.vtoonify" /></div>'
+FOOTER = '<div align=center><img id="visitor-badge" alt="visitor badge" src="https://visitor-badge.laobi.icu/badge?page_id=williamyang1991/VToonify" /></div>'
 
 ARTICLE = r"""
 If VToonify is helpful, please help to ⭐ the <a href='https://github.com/williamyang1991/VToonify' target='_blank'>Github Repo</a>. Thanks! 
