@@ -263,10 +263,10 @@ def main():
                                 outputs=[aligned_video, instyle, input_info])
 
         toonify_button.click(fn=model.image_toonify,
-                                inputs=[aligned_face, instyle, exstyle, style_degree],
+                                inputs=[aligned_face, instyle, exstyle, style_degree, style_type],
                                 outputs=[result_face, output_info])
         vtoonify_button.click(fn=model.video_tooniy,
-                                inputs=[aligned_video, instyle, exstyle, style_degree],
+                                inputs=[aligned_video, instyle, exstyle, style_degree, style_type],
                                 outputs=[result_video, output_info])
 
 
