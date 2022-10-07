@@ -201,7 +201,8 @@ class Model():
 
         return 'input.mp4', instyle, 'Successfully rescale the video to (%d, %d)'%(bottom-top, right-left)
     
-    def image_toonify(self, aligned_face: np.ndarray, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> tuple[np.ndarray, str]:
+    def image_toonify(self, aligned_face: np.ndarray, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float, style_type: str) -> tuple[np.ndarray, str]:
+        print(style_type + ' ' + self.style_name)
         if instyle is None or aligned_face is None:
             return np.zeros((256,256,3), np.uint8), 'Opps, something wrong with the input. Please go to Step 2 and Rescale Image/First Frame again.'
         if exstyle is None:
@@ -224,7 +225,8 @@ class Model():
         print('*** Toonify %dx%d image'%(y_tilde.shape[2], y_tilde.shape[3]))
         return ((y_tilde[0].cpu().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8), 'Successfully toonify the image with style of %s'%(self.style_name)
     
-    def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float) -> tuple[str, str]:
+    def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float, style_type: str) -> tuple[str, str]:
+        print(style_type + ' ' + self.style_name)
         if aligned_video is None:
             return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'         
         video_cap = cv2.VideoCapture(aligned_video)
