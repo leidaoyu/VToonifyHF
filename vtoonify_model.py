@@ -205,10 +205,10 @@ class Model():
         print(style_type + ' ' + self.style_name)
         if instyle is None or aligned_face is None:
             return np.zeros((256,256,3), np.uint8), 'Opps, something wrong with the input. Please go to Step 2 and Rescale Image/First Frame again.'
+        if self.style_name != style_type:
+            exstyle  = self.load_model(style_type)
         if exstyle is None:
             return np.zeros((256,256,3), np.uint8), 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
-        if exstyle is None:
-            exstyle = self.exstyle
         with torch.no_grad():
             if self.color_transfer:
                 s_w = exstyle
@@ -222,17 +222,18 @@ class Model():
             inputs = torch.cat((x, x_p/16.), dim=1)
             y_tilde = self.vtoonify(inputs, s_w.repeat(inputs.size(0), 1, 1), d_s = style_degree)        
             y_tilde = torch.clamp(y_tilde, -1, 1)
-        print('*** Toonify %dx%d image'%(y_tilde.shape[2], y_tilde.shape[3]))
+        print('*** Toonify %dx%d image with style of %s'%(y_tilde.shape[2], y_tilde.shape[3], style_type))
         return ((y_tilde[0].cpu().numpy().transpose(1, 2, 0) + 1.0) * 127.5).astype(np.uint8), 'Successfully toonify the image with style of %s'%(self.style_name)
     
     def video_tooniy(self, aligned_video: str, instyle: torch.Tensor, exstyle: torch.Tensor, style_degree: float, style_type: str) -> tuple[str, str]:
-        print(style_type + ' ' + self.style_name)
         if aligned_video is None:
             return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'         
         video_cap = cv2.VideoCapture(aligned_video)
         if instyle is None or aligned_video is None or video_cap.get(7) == 0:
             video_cap.release()
             return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'
+        if self.style_name != style_type:
+            exstyle  = self.load_model(style_type)
         if exstyle is None:
             return 'default.mp4', 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
         num = min(self.video_limit_gpu, int(video_cap.get(7)))
@@ -251,7 +252,7 @@ class Model():
                 batch_size = min(max(1, int(4 * 400 * 360/ video_cap.get(3) / video_cap.get(4))), 4)
         else:
             batch_size = 1
-        print('*** Toonify using batch size of %d on %dx%d video of %d frames'%(batch_size, int(video_cap.get(3)*4), int(video_cap.get(4)*4), num))
+        print('*** Toonify using batch size of %d on %dx%d video of %d frames with style of %s'%(batch_size, int(video_cap.get(3)*4), int(video_cap.get(4)*4), num, style_type))
         with torch.no_grad():
             if self.color_transfer:
                 s_w = exstyle
