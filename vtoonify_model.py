@@ -206,7 +206,7 @@ class Model():
         if instyle is None or aligned_face is None:
             return np.zeros((256,256,3), np.uint8), 'Opps, something wrong with the input. Please go to Step 2 and Rescale Image/First Frame again.'
         if self.style_name != style_type:
-            exstyle  = self.load_model(style_type)
+            exstyle, _  = self.load_model(style_type)
         if exstyle is None:
             return np.zeros((256,256,3), np.uint8), 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
         with torch.no_grad():
@@ -234,7 +234,7 @@ class Model():
             video_cap.release()
             return 'default.mp4', 'Opps, something wrong with the input. Please go to Step 2 and Rescale Video again.'
         if self.style_name != style_type:
-            exstyle  = self.load_model(style_type)
+            exstyle, _  = self.load_model(style_type)
         if exstyle is None:
             return 'default.mp4', 'Opps, something wrong with the style type. Please go to Step 1 and load model again.'
         num = min(self.video_limit_gpu, int(video_cap.get(7)))
