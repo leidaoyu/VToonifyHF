@@ -25,11 +25,8 @@ DESCRIPTION = '''
 <h1 style="font-weight: 900; margin-bottom: 7px;">
    Portrait Style Transfer with <a href="https://github.com/williamyang1991/VToonify">VToonify</a>
 </h1>
-<p>Running on {"<b>GPU 🔥</b>" if torch.cuda.is_available() else f"<b>CPU 🥶</b>. 
-For faster inference without waiting in queue, you may duplicate the space and use the GPU setting. "} 
-<a style="display:inline-block" href="https://huggingface.co/spaces/PKUWilliamYang/VToonify?duplicate=true"><img src="https://bit.ly/3gLdBN6" alt="Duplicate Space"></a>
-<p/>
 <p>For faster inference without waiting in queue, you may duplicate the space and use the GPU setting.
+<br/>
 <a style="display:inline-block" href="https://huggingface.co/spaces/PKUWilliamYang/VToonify?duplicate=true"><img src="https://bit.ly/3gLdBN6" alt="Duplicate Space"></a>
 <p/>
 <video id="video" width=50% controls="" preload="none" poster="https://repository-images.githubusercontent.com/534480768/53715b0f-a2df-4daa-969c-0e74c102d339">
