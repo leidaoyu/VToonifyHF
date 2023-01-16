@@ -28,7 +28,11 @@ DESCRIPTION = '''
 <video id="video" width=50% controls="" preload="none" poster="https://repository-images.githubusercontent.com/534480768/53715b0f-a2df-4daa-969c-0e74c102d339">
 <source id="mp4" src="https://user-images.githubusercontent.com/18130694/189483939-0fc4a358-fb34-43cc-811a-b22adb820d57.mp4
 " type="video/mp4">
-</videos></div>
+</videos>
+<p>Running on {"<b>GPU 🔥</b>" if torch.cuda.is_available() else f"<b>CPU 🥶</b>. 
+For faster inference without waiting in queue, you may duplicate the space and use the GPU setting<b>. "} 
+<a style="display:inline-block" href="https://huggingface.co/spaces/PKUWilliamYang/VToonify?duplicate=true"><img src="https://bit.ly/3gLdBN6" alt="Duplicate Space"></a>
+<p/></div>
 '''
 FOOTER = '<div align=center><img id="visitor-badge" alt="visitor badge" src="https://visitor-badge.laobi.icu/badge?page_id=williamyang1991/VToonify" /></div>'
 
