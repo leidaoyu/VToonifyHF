@@ -27,7 +27,8 @@ DESCRIPTION = '''
 </h1>
 <p>For faster inference without waiting in queue, you may duplicate the space and use the GPU setting.
 <br/>
-<a style="display:inline-block" href="https://huggingface.co/spaces/PKUWilliamYang/VToonify?duplicate=true"><img src="https://bit.ly/3gLdBN6" alt="Duplicate Space"></a>
+<a href="https://huggingface.co/spaces/PKUWilliamYang/VToonify?duplicate=true">
+<img style="margin-top: 0em; margin-bottom: 0em" src="https://bit.ly/3gLdBN6" alt="Duplicate Space"></a>
 <p/>
 <video id="video" width=50% controls="" preload="none" poster="https://repository-images.githubusercontent.com/534480768/53715b0f-a2df-4daa-969c-0e74c102d339">
 <source id="mp4" src="https://user-images.githubusercontent.com/18130694/189483939-0fc4a358-fb34-43cc-811a-b22adb820d57.mp4
