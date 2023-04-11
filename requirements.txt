@@ -5,3 +5,4 @@ Pillow
 scipy
 torch
 torchvision
+huggingface_hub
